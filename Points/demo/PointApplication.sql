@@ -81,3 +81,12 @@ CREATE TABLE airline_cc_program
 	CONSTRAINT pk_airline_program PRIMARY KEY(airline_iata_code, program_code)
 );
 
+CREATE TABLE point_exchangerate (
+    point_exchangerateId SERIAL PRIMARY KEY,
+    from_merchant_id INT NOT NULL REFERENCES merchant(merchant_id),
+    to_merchant_id INT NOT NULL REFERENCES merchant(merchant_id),
+    rate_date DATE NOT NULL,
+    exchange_rate DECIMAL(20, 10),
+    CONSTRAINT unq_point_exchangerate_3 UNIQUE (from_merchant_id, to_merchant_id, rate_date)
+);
+
